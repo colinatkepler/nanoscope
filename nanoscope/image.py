@@ -21,16 +21,25 @@ class NanoscopeImage(object):
 
     def __init__(self, image_type, raw_data, bytes_per_pixel, magnify,
                  scale, offset, scan_area, description):
-        self.unit = scale.unit.to_string()
+        try:
+            self.unit = scale.unit.to_string()
+            self.scale = scale.value
+            self.height_scale = self.scale * magnify
+        except AttributeError:
+            self.unit = scale.split()[1]
+            self.scale = float(scale.split()[0])
+
+        self.height_scale = self.scale * magnify
         self.bytes_per_pixel = bytes_per_pixel
         self.magnify = magnify
         self.raw_data = raw_data
         self.flat_data = None
         self.converted_data = None
         self.type = image_type
-        self.scale = scale.value
-        self.offset = offset.value
-        self.height_scale = self.scale * magnify
+        try:
+            self.offset = offset.value
+        except AttributeError:
+            self.offset = float(offset.split()[0])
         self.scan_area = scan_area
         self.description = description
 

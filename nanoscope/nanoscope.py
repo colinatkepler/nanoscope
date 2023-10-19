@@ -42,7 +42,7 @@ class NanoscopeFile(object):
     """
     Handles reading and parsing Nanoscope files.
     """
-    supported_versions = ['0x05120000', '0x05120130', '0x09300201', ]
+    supported_versions = ['0x05120000', '0x05120130', '0x09300201', '0x09010300']
 
     def __init__(self, file_object, encoding='utf-8', header_only=False, check_version=True):
         self.images = {}
@@ -157,7 +157,10 @@ class NanoscopeFile(object):
         parameter = self.config['_Images'][image_type][key]
         sensitivity = self.config[parameter.soft_scale]
         value = parameter.hard_value
-        return sensitivity * value
+        if value is not None:
+            return sensitivity * value
+        else:
+            return sensitivity
 
     def _get_config_fuzzy_key(self, config, keys):
         for k in keys:
