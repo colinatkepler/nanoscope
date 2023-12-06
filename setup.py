@@ -39,10 +39,9 @@ def find_version(filename, encoding='utf-8'):
 
 
 requirements = [
-    'numpy', #>=1.9,<1.11',
+    'numpy', # >=1.9,<1.11',
     'six>=1.8,<2',
-    #'astropy>=1.3,<2.0',
-    'astropy'
+    'astropy'  # >=1.3,<2.0',
 ]
 
 

@@ -4,11 +4,16 @@ from __future__ import absolute_import, division, unicode_literals
 import io
 
 import numpy as np
+from astropy import units as u
 import six
 
 from .image import NanoscopeImage
 from .parameter import parse_parameter
 from .error import UnsupportedVersion, MissingImageData
+        
+
+# allow astropy to parse arbitrary units
+u.add_enabled_units(u.def_unit('Arb'))
 
 
 def read(f, encoding='cp1252', header_only=False, check_version=True):
