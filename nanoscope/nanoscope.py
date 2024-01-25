@@ -160,7 +160,7 @@ class NanoscopeFile(object):
 
     def _get_sensitivity_value(self, image_type, key):
         parameter = self.config['_Images'][image_type][key]
-        sensitivity = self.config[parameter.soft_scale]
+        sensitivity = self.config.get(parameter.soft_scale, 1)
         value = parameter.hard_value
         if value is not None:
             return sensitivity * value

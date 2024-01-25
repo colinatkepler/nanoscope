@@ -9,6 +9,6 @@
     :license: MIT, see LICENSE for details
 """
 
-__version__ = '0.12.2'
+__version__ = '0.12.3'
 
 from .nanoscope import read
